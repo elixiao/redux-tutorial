@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>combineReducers</title>
+    <script src="//cdn.react.ren/redux.min.js"></script>
+    <script src="//cdn.react.ren/highlight.min.js"></script>
+</head>
+<body>
+<script class="show">
+
+    /*
+     1. redux.combineReducers()函数能够把多个小的reducer合成一个
+     2. action都会走所有reducer过一遍，更新state
+     */
+
+    const combinedReducer = Redux.combineReducers({
+        a: reducer1,
+        b: reducer2
+    })
+
+    let store = Redux.createStore(combinedReducer);
+    store.subscribe(() => {
+        console.log('最新的state是：', store.getState())
+    })
+
+    store.dispatch({type: 'one'})
+    store.dispatch({type: 'four'})
+    store.dispatch({type: 'five', name: '小明'})
+
+    function reducer1(state, action) {
+        let newState = state || 0;
+        switch (action.type) {
+            case 'one':
+                newState = 1
+                break;
+            case 'two':
+                newState = 2
+                break;
+            case 'three':
+                newState = 3
+                break;
+            case 'four':
+                newState = 4
+                break;
+        }
+        return newState
+    }
+
+    function reducer2(state, action) {
+
+        state = state || 'empty'
+
+        switch (action.type) {
+            case 'one':
+                return {name: 'one'}
+            case 'two':
+                state.name = 'two';
+                return state
+            case 'three':
+                return Object.assign({}, state, {name: 'three'})
+            case 'five':
+                return Object.assign({}, state, {name: action.name})
+        }
+
+        return state
+    }
+
+    /*
+     state 必须要有初始值，不能为undefined否则会报如下的错误：
+     Reducer "a" returned undefined during initialization.
+     If the state passed to the reducer is undefined, you must explicitly return the initial state.
+     The initial state may not be undefined.
+     */
+</script>
+
+</body>
+</html>

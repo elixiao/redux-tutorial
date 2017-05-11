@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bindActionCreator</title>
+    <script src="//cdn.react.ren/redux.min.js"></script>
+    <script src="//cdn.react.ren/highlight.min.js"></script>
+</head>
+<body>
+<script class="show">
+
+    /*
+     1. redux.bindActionCreator()函数能够根据绑定actionCreator并自动dispatch
+     */
+
+    let store = Redux.createStore(reducer)
+    store.subscribe(() => {
+        console.log('最新的state是：', store.getState())
+    })
+
+    let action1 = createAction(100)
+    store.dispatch(action1)
+
+    let action2 = createAction(50)
+    store.dispatch(action2)
+
+
+    let actionCreators = Redux.bindActionCreators(
+        {createAction, rename: createAction2},
+        store.dispatch // 传入 dispatch 函数
+    )
+    actionCreators.createAction(10) // 自动dispatch
+    actionCreators.rename('你好') // 自动dispatch
+    actionCreators.rename('我不好') // 自动dispatch
+
+    function reducer(state, action) {
+
+        let newState = state
+
+        switch (action.type) {
+            case 'one':
+                newState = 1
+                break
+            case 'two':
+                newState = 2
+                break
+            case 'three':
+                newState = 3
+                break
+            case 'four':
+                newState = 4
+                break
+        }
+
+        return newState
+    }
+
+    function createAction(score) { //根据参数动态生成action
+        if (score > 50) return {type: 'one'}
+        return {type: 'two'}
+    }
+
+    function createAction2(name) { //这个函数的名字是可以被改掉的
+        if (name.length > 2) return {type: 'three'}
+        return {type: 'four'}
+    }
+
+</script>
+
+</body>
+</html>

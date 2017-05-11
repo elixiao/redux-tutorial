@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>replaceReducer</title>
+    <script src="//cdn.react.ren/redux.min.js"></script>
+    <script src="//cdn.react.ren/highlight.min.js"></script>
+</head>
+<body>
+<script class="show">
+
+    /*
+     1. store.replaceReducer()函数能够修改当前的reducer
+     2. 更好完毕reducer之后，最初的state也发生变化，并且通知之前的订阅者
+     3. redux只通过比较新旧两个对象的存储位置来比较新旧两个对象是否相同
+     */
+
+    let store = Redux.createStore(reducer)
+    let state = store.getState()
+
+    store.subscribe(() => {
+        let newState = store.getState()
+        console.log('检测到dispatch行为，最新state为', JSON.stringify(newState), '新state与旧state' + (state === newState ? '【相等】' : '【不相等】'))
+        state = newState
+    })
+
+    store.dispatch({type: 'one'})
+    store.dispatch({type: 'two'})
+    store.dispatch({type: 'three', name: 'good!'})
+    store.dispatch({type: 'four'})
+    store.dispatch({type: 'five'})
+
+    console.log('----------更换reducer---------')
+
+    store.replaceReducer(newReducer) // 这里也会发生变化！
+    store.dispatch({type: 'one'})
+    store.dispatch({type: 'two'})
+    store.dispatch({type: 'three', name: 'good!'})
+    store.dispatch({type: 'four'})
+
+    function reducer(state, action) {
+
+        let newState = state
+
+        switch (action.type) {
+            case 'one':
+                newState = 1
+                break;
+            case 'two':
+                newState = 2
+                break;
+            case 'three':
+                newState = 3
+                break;
+        }
+
+        return newState
+    }
+
+    function newReducer(state, action) {
+
+        state = state || 'empty'
+
+        switch (action.type) {
+            case 'one':
+                return {name: 'one'}
+            case 'two':
+                state.name = 'two';
+                return state
+            case 'three':
+                return Object.assign({}, state, {name: action.name})
+        }
+
+        return state
+    }
+
+
+</script>
+
+</body>
+</html>

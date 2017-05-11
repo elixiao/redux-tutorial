@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dispatch</title>
+    <script src="//cdn.react.ren/redux.min.js"></script>
+    <script src="//cdn.react.ren/highlight.min.js"></script>
+</head>
+<body>
+<script class="show">
+
+    /*
+     1. store.dispatch()函数能够根据action更新state的状态，这也是更新state的唯一入口
+     */
+
+    let store = Redux.createStore(reducer)
+    console.log(store.getState()) // undefined
+
+    store.dispatch({type: 'one'})
+    console.log(store.getState()) // 1
+
+    store.dispatch({type: 'two'})
+    console.log(store.getState()) // 2
+
+    store.dispatch({type: 'three'})
+    console.log(store.getState()) // 3
+
+    store.dispatch({type: 'four'})
+    console.log(store.getState()) // 3
+
+    function reducer(state, action) {
+
+        let newState = state
+
+        switch (action.type) {
+            case 'one':
+                newState = 1
+                break;
+            case 'two':
+                newState = 2
+                break;
+            case 'three':
+                newState = 3
+                break;
+        }
+
+        return newState
+    }
+
+</script>
+
+</body>
+</html>

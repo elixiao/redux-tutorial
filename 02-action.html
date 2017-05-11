@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>action</title>
+    <script src="//cdn.react.ren/redux.min.js"></script>
+    <script src="//cdn.react.ren/highlight.min.js"></script>
+</head>
+<body>
+<script class="show">
+
+    /*
+
+     1. action是一个包含type属性的对象，type属性的作用是用于区分不同的action
+     2. action代表一种具体的行为，例如：改变颜色、添加新数据等
+     3. 除了type外，用户可以根据业务需求为action可以添加任意属性
+     4. 很多时候，action需要用函数动态生成，这个函数就是actionCreator
+
+     */
+
+    let action1 = {type: 'name'} // 最小的action
+    let action2 = {type: 'ADD', payload: {id: 1, name: '张三', age: 18}} // payload代表添加的数据
+    let action3 = {type: 'GET', response: ['Red', 'Black', 'Yellow'], error: 'Oops'} // response可能是从服务器获取的数据
+    let action4 = createAction(100)
+    function createAction(score) { //根据参数动态生成action
+        if (score > 50) return {type: 'one'}
+        return {type: 'two'}
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>applyMiddleware</title>
+    <script src="//cdn.react.ren/redux.min.js"></script>
+    <script src="//cdn.react.ren/highlight.min.js"></script>
+</head>
+<body>
+<script class="show">
+
+    /*
+     1. redux.applyMiddleware()函数能够在dispatch的前后做一些逻辑处理
+     */
+
+    let store = Redux.createStore(
+        reducer,
+        Redux.applyMiddleware(logger)
+    )
+
+    store.dispatch({type: 'one'})
+    store.dispatch({type: 'two'})
+
+    function reducer(state, action) {
+
+        let newState = state
+
+        switch (action.type) {
+            case 'one':
+                newState = 1
+                break;
+            case 'two':
+                newState = 2
+                break;
+            case 'three':
+                newState = 3
+                break;
+            case 'four':
+                newState = 4
+                break;
+        }
+
+        return newState
+    }
+
+    /**
+     * 用于记录所有被发起的 action 以及产生的新的 state。
+     */
+    function logger(store) {
+        return next => action => {
+            console.group(action.type)
+            console.info('dispatching', action)
+            let result = next(action)
+            console.log('next state', store.getState())
+            console.groupEnd(action.type)
+            return result
+        }
+    }
+
+</script>
+</body>
+</html>

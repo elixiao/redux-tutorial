@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>getState</title>
+    <script src="//cdn.react.ren/redux.min.js"></script>
+    <script src="//cdn.react.ren/highlight.min.js"></script>
+</head>
+<body>
+<script class="show">
+
+    /*
+     1. store.getState()函数能够获得state的最新值
+     2. 必须现有reducer之后才能生成store
+     3. store有dispatch、getState、replaceReducer和subscribe四个方法
+     */
+
+    let store = Redux.createStore(reducer);
+    console.log(store.getState()) // undefined
+
+    function reducer(state, action) {
+
+        let newState = state
+
+        switch (action.type) {
+            case 'one':
+                newState = 1
+                break;
+            case 'two':
+                newState = 2
+                break;
+            case 'three':
+                newState = 3
+                break;
+        }
+        return newState
+    }
+
+</script>
+
+</body>
+</html>

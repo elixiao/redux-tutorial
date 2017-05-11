@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>store</title>
+    <script src="//cdn.react.ren/redux.min.js"></script>
+    <script src="//cdn.react.ren/highlight.min.js"></script>
+</head>
+<body>
+<script class="show">
+
+    /*
+
+     1. store是调用Redux.createStore方法生成的复杂对象
+     2. 必须先有reducer之后才能生成store
+     3. store有dispatch、getState、replaceReducer和subscribe四个方法
+
+     */
+
+    let store = Redux.createStore(reducer)
+    console.log(store) // 不妨在控制台打印出来看看看
+
+    function reducer(state, action) {
+
+        let newState = state
+
+        switch (action.type) {
+            case 'one':
+                // newState = handleOne(state) 对state进行处理，例如：state+1，state.age=2，Object.assign({},state,{name:'张三'})
+                break;
+            case 'two':
+                // newState = handleTwo(state)
+                break;
+            case 'three':
+                // newState = handleThree(state)
+                break;
+        }
+
+        return newState
+    }
+
+
+</script>
+</body>
+</html>

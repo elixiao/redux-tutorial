@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>compose</title>
+    <script src="//cdn.react.ren/redux.min.js"></script>
+    <script src="//cdn.react.ren/highlight.min.js"></script>
+</head>
+<body>
+<script class="show">
+
+    /*
+     1. redux.compose()函数能够把嵌套的函数变成并列的函数
+     */
+
+    function a(n) {
+        console.log('a 参数 ' + n)
+        return n + 3
+    }
+
+    function b(n) {
+        console.log('b 参数 ' + n)
+        return n + 2
+    }
+
+    function c(n) {
+        console.log('c 参数 ' + n)
+        return n + 1
+    }
+
+    console.log(a(b(c(0))))
+    console.log(Redux.compose(a, b, c)(0))
+</script>
+
+</body>
+</html>

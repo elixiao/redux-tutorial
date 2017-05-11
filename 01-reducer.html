@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>reducer</title>
+    <script src="//cdn.react.ren/redux.min.js"></script>
+    <script src="//cdn.react.ren/highlight.min.js"></script>
+</head>
+<body>
+<script class="show">
+
+    /*
+
+     1. reducer就是一个函数，接收state和action两个参数，返回newState
+     2. state参数是一个字面量或对象，用于保存应用共享的变量，数据结构与应用本身的逻辑和功能有关
+     3. action参数是一个包含type属性的对象，type属性是必须的，除此之外用户还可以增加任意属性
+     4. reducer函数的作用是：根据action.type的取值来加工state，把结果赋给newState
+
+     */
+
+    function reducer(state, action) {
+
+        let newState = state
+
+        switch (action.type) {
+            case 'one':
+                // newState = handleOne(state) 对state进行处理，例如：state+1，state.age=2，Object.assign({},state,{name:'张三'})
+                break;
+            case 'two':
+                // newState = handleTwo(state)
+                break;
+            case 'three':
+                // newState = handleThree(state)
+                break;
+        }
+
+        return newState
+    }
+</script>
+</body>
+</html>
