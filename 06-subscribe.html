@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>subscribe</title>
-    <script src="//cdn.react.ren/redux.min.js"></script>
-    <script src="//cdn.react.ren/highlight.min.js"></script>
+    <script src="js/redux.min.js"></script>
+    <script src="js/highlight.min.js"></script>
 </head>
 <body>
 <script class="show">
@@ -13,35 +13,35 @@
      1. store.subscribe()函数接收一个函数作为参数，当state状态改变时通知订阅者
      */
 
-    let store = Redux.createStore(reducer);
+    let store = Redux.createStore(reducer)
 
     store.subscribe(() => {
         console.log('在dispatch之前订阅，获得state的新值为：', store.getState()) // 1
     })
 
-    store.dispatch({type: 'one'});
+    store.dispatch({type: 'one'})
 
     store.subscribe(() => {
         console.log('在dispatch之后订阅，获得state的新值为：', store.getState())
     })
 
-    store.dispatch({type: 'two'});
-    store.dispatch({type: 'three'});
-    store.dispatch({type: 'four'}); // 这里不会通知订阅者，因为state未改变
+    store.dispatch({type: 'two'})
+    store.dispatch({type: 'three'})
+    store.dispatch({type: 'four'}) // 这里不会通知订阅者，因为state未改变
 
 
     function reducer(state, action) {
-        let newState = state;
+        let newState = state
         switch (action.type) {
             case 'one':
                 newState = 1
-                break;
+                break
             case 'two':
                 newState = 2
-                break;
+                break
             case 'three':
                 newState = 3
-                break;
+                break
         }
         return newState
     }

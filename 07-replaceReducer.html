@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>replaceReducer</title>
-    <script src="//cdn.react.ren/redux.min.js"></script>
-    <script src="//cdn.react.ren/highlight.min.js"></script>
+    <script src="js/redux.min.js"></script>
+    <script src="js/highlight.min.js"></script>
 </head>
 <body>
 <script class="show">
@@ -45,13 +45,13 @@
         switch (action.type) {
             case 'one':
                 newState = 1
-                break;
+                break
             case 'two':
                 newState = 2
-                break;
+                break
             case 'three':
                 newState = 3
-                break;
+                break
         }
 
         return newState
@@ -65,7 +65,7 @@
             case 'one':
                 return {name: 'one'}
             case 'two':
-                state.name = 'two';
+                state.name = 'two'
                 return state
             case 'three':
                 return Object.assign({}, state, {name: action.name})

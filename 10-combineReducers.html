@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>combineReducers</title>
-    <script src="//cdn.react.ren/redux.min.js"></script>
-    <script src="//cdn.react.ren/highlight.min.js"></script>
+    <script src="js/redux.min.js"></script>
+    <script src="js/highlight.min.js"></script>
 </head>
 <body>
 <script class="show">
@@ -19,7 +19,7 @@
         b: reducer2
     })
 
-    let store = Redux.createStore(combinedReducer);
+    let store = Redux.createStore(combinedReducer)
     store.subscribe(() => {
         console.log('最新的state是：', store.getState())
     })
@@ -29,20 +29,20 @@
     store.dispatch({type: 'five', name: '小明'})
 
     function reducer1(state, action) {
-        let newState = state || 0;
+        let newState = state || 0
         switch (action.type) {
             case 'one':
                 newState = 1
-                break;
+                break
             case 'two':
                 newState = 2
-                break;
+                break
             case 'three':
                 newState = 3
-                break;
+                break
             case 'four':
                 newState = 4
-                break;
+                break
         }
         return newState
     }
@@ -55,7 +55,7 @@
             case 'one':
                 return {name: 'one'}
             case 'two':
-                state.name = 'two';
+                state.name = 'two'
                 return state
             case 'three':
                 return Object.assign({}, state, {name: 'three'})
